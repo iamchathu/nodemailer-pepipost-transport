@@ -1,5 +1,7 @@
 # Pepipost transport module for Nodemailer
 
+[![npm](https://img.shields.io/npm/v/nodemailer-pepipost-transport.svg)](https://www.npmjs.com/package/nodemailer-pepipost-transport)
+
 Applies for [Nodemailer](http://www.nodemailer.com/) v1+ and not for v0.x where transports are built-in.
 
 ## Usage
