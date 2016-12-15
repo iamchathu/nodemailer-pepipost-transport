@@ -1,7 +1,8 @@
 'use strict';
 
 const PepipostSDK = require('pepipost-sdk-nodejs');
-const packageData = require('package.json');
+const packageData = require('./package.json');
+const addressparser = require('addressparser');
 
 let Email = PepipostSDK.EmailController;
 
@@ -17,18 +18,22 @@ function PepiPostTransport(options) {
 
 PepiPostTransport.prototype.send = function (mail, callback) {
     
-	var data = {
+	let data = {
 	    "api_key": this.auth.api_key,
 	    "email_details": {
-	        "fromname": mail.from[1],
-	        "subject": mail.subject,
-	        "from": mail.from[0],
-	        "content": mail.html || mail.text
+	        "fromname": addressparser(mail.data.from)[0].name,
+	        "subject": mail.data.subject,
+	        "from": addressparser(mail.data.from)[0].address,
+	        "content": mail.message.content
 	    },
-	    "recipients": mail.to
+	    "recipients": mail.data.to || []
 	};
 
+	console.log(data.recipients);
+
 	Email.send(data,(err,parsed,context)=>{
+		console.log(parsed);
+		// console.log(context);
 		if(parsed.errorcode==0){
 			callback(null,"Mail send successfully");
 		}else{
