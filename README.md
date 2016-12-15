@@ -28,7 +28,7 @@ Where
    
 ### Examples
 
-**Example 1.** Use AWS credentials to set up the sender
+**Example 1.** Use Pepipost API key to set up the sender
 
 ```javascript
 const transporter = nodemailer.createTransport(pepipostTransport ({
