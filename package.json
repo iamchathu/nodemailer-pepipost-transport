@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/iamchathu/nodemailer-pepipost-transport#readme",
   "dependencies": {
+    "addressparser": "^1.0.1",
     "pepipost-sdk-nodejs": "^0.4.0"
   }
 }
