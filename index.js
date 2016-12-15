@@ -1,15 +1,46 @@
 'use strict';
 
-// This example creates a transport object that pipes the raw message to console
+const PepipostSDK = require('pepipost-sdk-nodejs');
+const packageData = require('package.json');
 
-var transport = {
-    name: 'pepipost transport',
-    version: '0.0.1',
-    send: function (mail, callback) {
-        var input = mail.message.createReadStream();
-        input.pipe(process.stdout);
-        input.on('end', function () {
-            callback(null, true);
-        });
-    }
+let Email = PepipostSDK.EmailController;
+
+function PepiPostTransport(options) {
+    options = options || {};
+    
+    this.options = options;
+    this.auth = options.auth;
+    this.name = 'pepipost';
+    this.version = packageData.version;
+
+}
+
+PepiPostTransport.prototype.send = function (mail, callback) {
+    
+	var data = {
+	    "api_key": this.auth.api_key,
+	    "email_details": {
+	        "fromname": mail.from[1],
+	        "subject": mail.subject,
+	        "from": mail.from[0],
+	        "content": mail.html || mail.text
+	    },
+	    "recipients": mail.to
+	};
+
+	Email.send(data,(err,parsed,context)=>{
+		if(parsed.errorcode==0){
+			callback(null,"Mail send successfully");
+		}else{
+			callback(err,parsed.errormessage);
+		}
+	});
+
 };
+
+// expose to the world
+module.exports = function (options) {
+    return new PepiPostTransport(options);
+};
+
+
