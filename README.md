@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/nodemailer-pepipost-transport.svg)](https://www.npmjs.com/package/nodemailer-pepipost-transport)
 [![Twitter](https://img.shields.io/twitter/url/https/www.npmjs.com/package/nodemailer-pepipost-transport.svg?style=social)](https://twitter.com/intent/tweet?text=Pepipost:&url=https://github.com/iamchathu/nodemailer-pepipost-transport)
 
-Applies for [Nodemailer](http://www.nodemailer.com/) v1+ and not for v0.x where transports are built-in.
+Applies for [Nodemailer](http://www.nodemailer.com/) v1+ and not for v0.x where transports are built-in. Used [Pepipost Nodejs SDK](https://github.com/pepipost/pepipost-sdk-nodejs)
 
 ## Usage
 
